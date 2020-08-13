@@ -3,17 +3,15 @@ const path = require('path');
 
 const app = express();
 
-const port = 30;
+const port = 3000;
 
-const bootstrapfolder = '';
-//const bootstrapfolder = '/bootstrap-examples/floating-labels';
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
 
-app.use(express.static(path.join(__dirname, `./static${bootstrapfolder}`)));
+app.use(express.static(path.join(__dirname, './static')));
 
 app.get('/', (request, response) => {
-    response.sendFile(
-        path.join(__dirname, `./static${bootstrapfolder}/index.html`)
-    );
+    response.render('index', { pageTitle: 'Welcome' });
 });
 
 app.get('/speakers', (request, response) => {
