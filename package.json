@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/cdgwebs/first-node-website/issues"
   },
-  "homepage": "https://github.com/cdgwebs/first-node-website#readme"
+  "homepage": "https://github.com/cdgwebs/first-node-website#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^4.44.1"
+  }
 }
