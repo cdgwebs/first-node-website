@@ -1,0 +1,19 @@
+{
+  "name": "first-node-website",
+  "version": "1.0.0",
+  "description": "First attempt at a node website with express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdgwebs/first-node-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdgwebs/first-node-website/issues"
+  },
+  "homepage": "https://github.com/cdgwebs/first-node-website#readme"
+}
