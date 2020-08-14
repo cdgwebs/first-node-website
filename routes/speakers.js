@@ -1,6 +1,4 @@
 const express = require('express');
-const speakersRoute = require('./speakers');
-const feedbackRoute = require('./feedback');
 
 const router = express.Router();
 
@@ -9,11 +7,12 @@ const router = express.Router();
 */
 module.exports = () => {
     router.get('/', (request, response) => {
-        response.render('index', { pageTitle: 'Welcome' });
+        return response.send('Speakers list');
     });
 
-    router.use('/speakers', speakersRoute());
-    router.use('/feedback', feedbackRoute());
+    router.get('/:shortname', (request, response) => {
+        return response.send(`Details of page ${request.params.shortname}`);
+    });
 
     return router;
 };
