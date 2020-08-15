@@ -9,6 +9,11 @@ const router = express.Router();
 */
 module.exports = (params) => {
     router.get('/', (request, response) => {
+        if (!request.session.visitCount) {
+            request.session.visitCount = 0;
+        }
+        request.session.visitCount += 1;
+        console.log(`Visit count is: ${request.session.visitCount}`);
         response.render('index', { pageTitle: 'Welcome' });
     });
 

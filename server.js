@@ -7,10 +7,19 @@ const SpeakerService = require('./services/SpeakerService');
 const feedbackService = new FeedbackService('./data/feedback.json');
 const speakerService = new SpeakerService('./data/speakers.json');
 
+const cookieSession = require('cookie-session');
+
 const app = express();
 
 const port = 3000;
 
+app.set('trust proxy', 1);
+app.use(
+    cookieSession({
+        name: 'session',
+        keys: ['ofhjadsgoihaig', 'asdkfhadoifh'],
+    })
+);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
