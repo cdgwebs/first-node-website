@@ -7,13 +7,13 @@ const router = express.Router();
 /*  This is really cool using the arrow function because
     you can pass params with this module.export
 */
-module.exports = () => {
+module.exports = (params) => {
     router.get('/', (request, response) => {
         response.render('index', { pageTitle: 'Welcome' });
     });
 
-    router.use('/speakers', speakersRoute());
-    router.use('/feedback', feedbackRoute());
+    router.use('/speakers', speakersRoute(params));
+    router.use('/feedback', feedbackRoute(params));
 
     return router;
 };
