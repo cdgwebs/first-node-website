@@ -26,6 +26,14 @@ app.set('views', path.join(__dirname, './views'));
 // Middleware
 app.use(express.static(path.join(__dirname, './static')));
 
+app.use((request, response, next) => {
+    app.locals.someVariable = 'hello there';
+    console.log(app.locals.someVariable);
+    next();
+});
+
+app.locals.siteName = 'ROUX Meetups';
+
 app.use(
     '/',
     routes({
@@ -33,12 +41,6 @@ app.use(
         speakerService: speakerService,
     })
 );
-
-/*
-app.get('/speakers', (request, response) => {
-    response.sendFile(path.join(__dirname, './static/speakers.html'));
-});
-*/
 
 app.listen(port, () => {
     // Just to log the root path
