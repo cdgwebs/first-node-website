@@ -3,6 +3,7 @@ const path = require('path');
 const routes = require('./routes');
 const FeedbackService = require('./services/FeedbackService');
 const SpeakerService = require('./services/SpeakerService');
+const createError = require('http-errors');
 
 const feedbackService = new FeedbackService('./data/feedback.json');
 const speakerService = new SpeakerService('./data/speakers.json');
@@ -45,6 +46,21 @@ app.use(
         speakerService: speakerService,
     })
 );
+
+// Catch all for 404
+app.use((request, response, next) => {
+    return next(createError(404, 'File Not Found'));
+});
+
+app.use((err, request, response, next) => {
+    response.locals.message = err.message;
+    console.log(response.locals.message);
+    const status = err.status || 500;
+    response.locals.status = status;
+    response.status(status);
+    // This is the actual page
+    response.render('error');
+});
 
 app.listen(port, () => {
     // Just to log the root path
