@@ -11,11 +11,28 @@ module.exports = (params) => {
 
     router.get('/', async(request, response) => {
         const speakers = await speakerService.getList();
-        return response.json(speakers);
+        const allArtwork = await speakerService.getAllArtwork();
+        response.render('layout', {
+            pageTitle: 'Speakers',
+            template: 'speakers',
+            speakers,
+            allArtwork,
+        });
     });
 
-    router.get('/:shortname', (request, response) => {
-        return response.send(`Details of page ${request.params.shortname}`);
+    router.get('/:shortname', async(request, response) => {
+        const speaker = await speakerService.getSpeaker(request.params.shortname);
+        const speakerArt = await speakerService.getArtworkForSpeaker(
+            request.params.shortname
+        );
+        const allArtwork = await speakerService.getAllArtwork();
+        response.render('layout', {
+            pageTitle: 'Speakers',
+            template: 'speakers-detail',
+            speaker,
+            speakerArt,
+            allArtwork,
+        });
     });
 
     return router;
