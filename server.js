@@ -4,6 +4,7 @@ const routes = require('./routes');
 const FeedbackService = require('./services/FeedbackService');
 const SpeakerService = require('./services/SpeakerService');
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
 
 const feedbackService = new FeedbackService('./data/feedback.json');
 const speakerService = new SpeakerService('./data/speakers.json');
@@ -18,9 +19,13 @@ app.set('trust proxy', 1);
 app.use(
     cookieSession({
         name: 'session',
-        keys: ['ofhjadsgoihaig', 'asdkfhadoifh'],
+        keys: ['ofhjadsdgoihaig', 'asdkfhaddoifh'],
     })
 );
+
+// For form parsing of body
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 
