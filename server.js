@@ -26,10 +26,14 @@ app.set('views', path.join(__dirname, './views'));
 // Middleware
 app.use(express.static(path.join(__dirname, './static')));
 
-app.use((request, response, next) => {
-    app.locals.someVariable = 'hello there';
-    console.log(app.locals.someVariable);
-    next();
+app.use(async(request, response, next) => {
+    try {
+        const names = await speakerService.getNames();
+        response.locals.speakerNames = names;
+        return next();
+    } catch (err) {
+        return next(err);
+    }
 });
 
 app.locals.siteName = 'ROUX Meetups';
